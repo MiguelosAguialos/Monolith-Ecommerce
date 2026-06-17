@@ -1,13 +1,17 @@
 spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  config:
+    import: optional:file:./config/.env-${spring.profiles.active}[.properties]
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
   datasource:
-    url: jdbc:h2:mem:test
+    url: ${SPRING.DATASOURCE.URL}
     driver-class-name: org.h2.Driver
-    username: sa
-    password: sa
+    username: ${SPRING.DATASOURCE.USERNAME}
+    password: ${SPRING.DATASOURCE.PASSWORD}
   h2:
     console:
       enabled: true
