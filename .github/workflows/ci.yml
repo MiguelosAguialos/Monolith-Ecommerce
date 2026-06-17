@@ -36,23 +36,6 @@ jobs:
           echo "Environment:$ENVIRONMENT"
 
       # ------------------------------------------------------
-      # STEP 1.2 → ARTIFACTS - Create file
-      # ------------------------------------------------------
-      - name: Create file
-        run: |
-          echo "Text from CI pipeline" > logs.txt
-          echo "File created successfully"
-
-      # ------------------------------------------------------
-      # STEP 1.3 → ARTIFACTS - Build Artifact
-      # ------------------------------------------------------
-      - name: Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: .
-
-      # ------------------------------------------------------
       # STEP 2 → INSTALL DEPENDENCIES (SIMULATED)
       # ------------------------------------------------------
       - name: Install Dependencies (Java/Node/Python)
@@ -78,6 +61,8 @@ jobs:
         run: |
           echo "Building project for all languages..."
           echo "Java → mvn clean package"
+          ./gradlew clean
+          ./gradlew bootJar
           echo "Node → npm run build"
           echo "Python → python setup.py build"
           echo "Build step completed."
@@ -109,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts-demo
-          path: .
+          path: ./build/libs
         # Uploading entire folder just for demo, not real.
 
       # ------------------------------------------------------
