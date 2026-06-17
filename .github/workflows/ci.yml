@@ -3,7 +3,13 @@ name: Real Dev CI Demo (Echo Only)
 on:
 #  push:
 #  pull_request:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT:
+        required: true
+        description: "Ambiente de execução da pipeline"
+        default: dev
+        type: string
 
 jobs:
   ci-pipeline:
