@@ -1,8 +1,9 @@
 name: Real Dev CI Demo (Echo Only)
 
 on:
-  push:
-  pull_request:
+#  push:
+#  pull_request:
+  workflow_dispatch:
 
 jobs:
   ci-pipeline:
@@ -14,6 +15,14 @@ jobs:
       # ------------------------------------------------------
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      # ------------------------------------------------------
+      # STEP 1.1 → ENV AND SECRETS*
+      # ------------------------------------------------------
+      - name: Check ENV
+        env:
+          TEST: ${{ secrets.TEST }}
+        run: echo "Test=$TEST"
 
       # ------------------------------------------------------
       # STEP 2 → INSTALL DEPENDENCIES (SIMULATED)
@@ -99,10 +108,10 @@ jobs:
       - name: Final Status
         run: echo "CI pipeline finished."
 
-      - name: Intentional Failure (Debug Demo)
-        run: |
-          echo "Simulating failure for debugging..."
-          exit 1
+#      - name: Intentional Failure (Debug Demo)
+#        run: |
+#          echo "Simulating failure for debugging..."
+#          exit 1
 
       - name: Failure Handler
         if: failure()
