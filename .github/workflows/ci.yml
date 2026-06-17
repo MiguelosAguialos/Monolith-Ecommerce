@@ -32,8 +32,9 @@ jobs:
         env:
           TEST: ${{ secrets.TEST }}
         run: | 
-          echo "Test:$TEST"
+          echo "Secret Test:$TEST"
           echo "Environment:$ENVIRONMENT"
+          echo "Running in branch ${{github.ref_name}}"
 
       # ------------------------------------------------------
       # STEP 1.2 → Grant execute permission for gradlew
