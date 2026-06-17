@@ -20,12 +20,6 @@ jobs:
 
     steps:
       # ------------------------------------------------------
-      # STEP 0 → Grant execute permission for gradlew
-      # ------------------------------------------------------
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-
-      # ------------------------------------------------------
       # STEP 1 → CHECKOUT CODE
       # ------------------------------------------------------
       - name: Checkout Code
@@ -40,6 +34,12 @@ jobs:
         run: | 
           echo "Test:$TEST"
           echo "Environment:$ENVIRONMENT"
+
+      # ------------------------------------------------------
+      # STEP 1.2 → Grant execute permission for gradlew
+      # ------------------------------------------------------
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       # ------------------------------------------------------
       # STEP 2 → INSTALL DEPENDENCIES (SIMULATED)
