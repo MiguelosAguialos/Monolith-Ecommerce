@@ -20,6 +20,12 @@ jobs:
 
     steps:
       # ------------------------------------------------------
+      # STEP 0 → GRANT EXECUTE PERMISSION FOR GRADLE
+      # ------------------------------------------------------
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # ------------------------------------------------------
       # STEP 1 → CHECKOUT CODE
       # ------------------------------------------------------
       - name: Checkout Code
