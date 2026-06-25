@@ -6,10 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       ENVIRONMENT:
+        options:
+          - dev
+          - qa
+          - prod
         required: true
         description: "Ambiente de execução da pipeline"
         default: dev
-        type: string
+        type: choice
 
 env:
   ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
@@ -34,7 +38,7 @@ jobs:
         run: | 
           echo "Secret Test:$TEST"
           echo "Environment:$ENVIRONMENT"
-          echo "Running in branch ${{github.ref_name}}"
+          echo "Running on branch [${{github.ref_name}}]"
 
       # ------------------------------------------------------
       # STEP 1.2 → Grant execute permission for gradlew
