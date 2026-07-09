@@ -62,11 +62,19 @@ O projeto possui uma stack de desenvolvimento em `docker/dev`.
 
 ### 1. Subir com variaveis de ambiente
 
-Execute o Compose a partir da pasta `docker/dev` informando o arquivo de ambiente:
+Execute o Compose (caso o banco de dados já tenha sido subido) a partir da pasta `docker/dev` informando o arquivo de ambiente:
 
 ```bash
-docker compose --env-file ../../configs/.env-dev -f docker-compose.yml up -d
+PROFILE={env} docker compose up -d ecommerce
 ```
+
+Execute o Compose (caso o banco de dados não tenha sido subido) a partir da pasta `docker/dev` informando o arquivo de ambiente:
+
+```bash
+PROFILE={env} docker compose --env-file ../../configs/.env-{env} up -d
+```
+
+Por padrão, o ambiente `dev` sera subido.
 
 ### 2. Verificar os servicos
 
@@ -76,7 +84,7 @@ docker compose --env-file ../../configs/.env-dev -f docker-compose.yml up -d
 ### 3. Parar a stack
 
 ```bash
-docker compose --env-file ../../configs/.env-dev -f docker-compose.yml down
+docker compose -f docker-compose.yml down
 ```
 
 ## Variaveis de Ambiente
